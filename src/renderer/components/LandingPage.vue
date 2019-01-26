@@ -1,128 +1,88 @@
 <template>
-  <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
-    <main>
-      <div class="left-side">
-        <span class="title">
-          Welcome to your new project!
-        </span>
-        <system-information></system-information>
-      </div>
-
-      <div class="right-side">
-        <div class="doc">
-          <div class="title">Getting Started</div>
-          <p>
-            electron-vue comes packed with detailed documentation that covers everything from
-            internal configurations, using the project structure, building your application,
-            and so much more.
-          </p>
-          <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button><br><br>
-        </div>
-        <div class="doc">
-          <div class="title alt">Other Documentation</div>
-          <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
-          <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
-        </div>
-      </div>
-    </main>
-  </div>
+	<div class="landing-page">
+		<!-- <el-menu
+			:default-active="activeIndex"
+			mode="horizontal"
+			@select="handleSelect"
+		>
+			<el-menu-item index="1">处理中心</el-menu-item>
+			<el-submenu index="2">
+				<template slot="title">我的工作台</template>
+				<el-menu-item index="2-1">选项1</el-menu-item>
+				<el-menu-item index="2-2">选项2</el-menu-item>
+				<el-menu-item index="2-3">选项3</el-menu-item>
+				<el-submenu index="2-4">
+					<template slot="title">选项4</template>
+					<el-menu-item index="2-4-1">选项1</el-menu-item>
+					<el-menu-item index="2-4-2">选项2</el-menu-item>
+					<el-menu-item index="2-4-3">选项3</el-menu-item>
+				</el-submenu>
+			</el-submenu>
+			<el-menu-item index="3" disabled>消息中心</el-menu-item>
+		</el-menu>-->
+		<el-row>
+			<el-col class="left" :span="6">
+				<el-menu
+					class="menu"
+					default-active="index"
+					background-color="#545c64"
+					text-color="#fff"
+					active-text-color="#ffd04b"
+					:router="true"
+				>
+					<el-menu-item index="index">
+						<i class="el-icon-info"></i>
+						<span slot="title">仪表盘</span>
+					</el-menu-item>
+					<el-menu-item index="exampapers">
+						<i class="el-icon-tickets"></i>
+						<span slot="title">试卷管理</span>
+					</el-menu-item>
+					<el-menu-item index="questions">
+						<i class="el-icon-edit"></i>
+						<span slot="title">题目管理</span>
+					</el-menu-item>
+					<el-menu-item index="files">
+						<i class="el-icon-document"></i>
+						<span slot="title">文件管理</span>
+					</el-menu-item>
+					<el-menu-item index="students">
+						<i class="el-icon-menu"></i>
+						<span slot="title">学生管理</span>
+					</el-menu-item>
+				</el-menu>
+			</el-col>
+			<el-col class="right" :span="18">
+				<router-view></router-view>
+			</el-col>
+		</el-row>
+	</div>
 </template>
 
 <script>
-  import SystemInformation from './LandingPage/SystemInformation'
-
-  export default {
-    name: 'landing-page',
-    components: { SystemInformation },
-    methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
-      }
-    }
-  }
+	export default {
+		data() {
+			return {};
+		}
+	};
 </script>
 
-<style>
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+<style lang="scss">
+	.landing-page {
+		&,
+		& > .el-row,
+		.left,
+		.right,
+		.menu {
+			height: 100%;
+		}
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+		.right {
+			background-color: whitesmoke;
 
-  body { font-family: 'Source Sans Pro', sans-serif; }
-
-  #wrapper {
-    background:
-      radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
-      );
-    height: 100vh;
-    padding: 60px 80px;
-    width: 100vw;
-  }
-
-  #logo {
-    height: auto;
-    margin-bottom: 20px;
-    width: 420px;
-  }
-
-  main {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  main > div { flex-basis: 50%; }
-
-  .left-side {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .welcome {
-    color: #555;
-    font-size: 23px;
-    margin-bottom: 10px;
-  }
-
-  .title {
-    color: #2c3e50;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 6px;
-  }
-
-  .title.alt {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .doc p {
-    color: black;
-    margin-bottom: 10px;
-  }
-
-  .doc button {
-    font-size: .8em;
-    cursor: pointer;
-    outline: none;
-    padding: 0.75em 2em;
-    border-radius: 2em;
-    display: inline-block;
-    color: #fff;
-    background-color: #4fc08d;
-    transition: all 0.15s ease;
-    box-sizing: border-box;
-    border: 1px solid #4fc08d;
-  }
-
-  .doc button.alt {
-    color: #42b983;
-    background-color: transparent;
-  }
+			& > div {
+				padding: 20px;
+			}
+		}
+	}
 </style>
