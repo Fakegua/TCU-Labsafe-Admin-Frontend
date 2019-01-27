@@ -16,7 +16,12 @@ export default new Router({
         {
           path: 'exampapers',
           name: 'exampapers',
-          component: require('@/components/ExamPage/ManageExampapersPage').default
+          component: require('@/components/ExampapersPage').default
+        },
+        {
+          path: 'questions',
+          name: 'questions',
+          component: require('@/components/QuestionsPage').default
         }
       ]
     },
