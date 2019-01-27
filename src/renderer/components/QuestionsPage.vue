@@ -1,5 +1,17 @@
 <template>
 	<div class="manage-exampapers-page">
+		<el-input placeholder="请输入搜索内容" v-model="searchContent">
+			<el-select style="width:130px" v-model="searchCategory" slot="prepend" placeholder="请选择">
+				<el-option label="题目" value="question_title"></el-option>
+				<el-option label="题目分类" value="question_category"></el-option>
+				<el-option label="分值" value="question_mark"></el-option>
+				<el-option label="所属试卷" value="question_exampaper"></el-option>
+				<el-option label="添加日期" value="addtime"></el-option>
+			</el-select>
+			<el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+		</el-input>
+		<br>
+		<br>
 		<el-table :data="tableData" stripe border max-height="500" style="width: 100%">
 			<!-- <el-table-column type="index" align="center" label="序号"></el-table-column> -->
 			<el-table-column width="130" align="center" prop="addtime" label="添加日期"></el-table-column>
@@ -143,10 +155,12 @@
 				tableData: [],
 				dialogVisible: false,
 				questionExampaperOptions: [],
+				searchContent: "",
+				searchCategory: "question_title",
 				form: {
 					id: "",
 					questionTitle: "",
-					questionCategory: "选择题",
+					questionCategory: "",
 					optionA: "",
 					optionB: "",
 					optionC: "",
@@ -168,7 +182,7 @@
 						}
 					],
 					questionMark: [
-						{ required: true, message: "请输入分值", trigger: "change" },
+						{ required: true, message: "请输入分值", trigger: "change" }
 					],
 					questionAnswer: [
 						{ required: true, message: "请输入答案", trigger: "change" }
@@ -193,10 +207,22 @@
 				});
 		},
 		methods: {
-			init() {
+			init(searchContent,searchCategory) {
 				this.tableData = [];
-				this.$http
-					.get(this.$domain + `/exam/questions?pageNum=${this.currentPage}`)
+				let cache; //暂存 axios promise
+				if (searchContent) {
+					cache = this.$http.get(
+						this.$domain +
+							`/exam/questions?pageNum=${
+								this.currentPage
+							}&searchContent=${searchContent}&searchCategory=${searchCategory}`
+					);
+				} else {
+					cache = this.$http.get(
+						this.$domain + `/exam/questions?pageNum=${this.currentPage}`
+					);
+				}
+				cache
 					.then(data => {
 						this.questions = data.data.questionList;
 						this.pageCount = data.data.pageCount;
@@ -215,7 +241,7 @@
 					this.dialogVisible = true;
 					this.dialogTitle = "添加题目";
 					this.form.questionTitle = "";
-					this.form.questionCategory = "";
+					this.form.questionCategory = "选择题";
 					this.form.optionA = "";
 					this.form.optionB = "";
 					this.form.optionC = "";
@@ -289,7 +315,7 @@
 								.then(result => {
 									this.dialogVisible = false;
 									this.$message.success("编辑成功");
-									this.init();
+									this.init(this.searchContent,this.searchCategory);
 								})
 								.catch(err => {
 									this.$message.error("操作失败，请检查网络或联系管理员");
@@ -304,7 +330,7 @@
 					.delete(this.$domain + `/exam/questions?id=${data.id}`)
 					.then(result => {
 						this.$message.success("删除成功");
-						this.init();
+						this.init(this.searchContent,this.searchCategory);
 					})
 					.catch(err => {
 						this.$message.error("操作失败，请检查网络或联系管理员");
@@ -317,6 +343,9 @@
 			currentChange(c) {
 				this.currentPage = c;
 				this.init();
+			},
+			search() {
+				this.init(this.searchContent,this.searchCategory);
 			}
 		}
 	};
