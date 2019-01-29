@@ -34,12 +34,16 @@
 						<i class="el-icon-info"></i>
 						<span slot="title">仪表盘</span>
 					</el-menu-item>
+					<el-menu-item index="articles">
+						<i class="el-icon-edit"></i>
+						<span slot="title">文章管理</span>
+					</el-menu-item>
 					<el-menu-item index="exampapers">
 						<i class="el-icon-tickets"></i>
 						<span slot="title">试卷管理</span>
 					</el-menu-item>
 					<el-menu-item index="questions">
-						<i class="el-icon-edit"></i>
+						<i class="el-icon-edit-outline"></i>
 						<span slot="title">题目管理</span>
 					</el-menu-item>
 					<el-menu-item index="files">

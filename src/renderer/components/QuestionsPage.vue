@@ -1,5 +1,5 @@
 <template>
-	<div class="manage-exampapers-page">
+	<div class="manage-questions-page">
 		<el-input placeholder="请输入搜索内容" v-model="searchContent">
 			<el-select style="width:130px" v-model="searchCategory" slot="prepend" placeholder="请选择">
 				<el-option label="题目" value="question_title"></el-option>
@@ -34,7 +34,7 @@
 			<el-table-column align="center" width="150" label="操作" fixed="right">
 				<template slot-scope="scope">
 					<el-button @click="editQuestion(scope.row)" type="primary" plain round size="small">编辑</el-button>
-					<el-button @click="deleteExampaper(scope.row)" type="warning" plain round size="small">删除</el-button>
+					<el-button @click="deleteQuestion(scope.row)" type="warning" plain round size="small">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -116,7 +116,7 @@
 					</el-col>
 					<el-col :span="8">
 						<el-form-item prop="questionMark" label="分值">
-							<el-input v-model="form.questionMark"></el-input>
+							<el-input type="number" v-model="form.questionMark"></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="8">
@@ -198,7 +198,6 @@
 			this.$http
 				.get(this.$domain + "/exam/exampapers")
 				.then(data => {
-					console.log("data :", data);
 					this.questionExampaperOptions = data.data;
 				})
 				.catch(err => {
@@ -325,7 +324,7 @@
 					});
 				}
 			},
-			deleteExampaper(data) {
+			deleteQuestion(data) {
 				this.$http
 					.delete(this.$domain + `/exam/questions?id=${data.id}`)
 					.then(result => {
@@ -352,7 +351,7 @@
 </script>
 
 <style lang="scss">
-	.manage-exampapers-page {
+	.manage-questions-page {
 		.el-table {
 			box-shadow: 0 0 10px gainsboro;
 		}

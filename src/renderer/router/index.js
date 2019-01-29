@@ -22,6 +22,11 @@ export default new Router({
           path: 'questions',
           name: 'questions',
           component: require('@/components/QuestionsPage').default
+        },
+        {
+          path: 'articles',
+          name: 'articles',
+          component: require('@/components/ArticlesPage').default
         }
       ]
     },
