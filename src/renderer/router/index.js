@@ -27,6 +27,11 @@ export default new Router({
           path: 'articles',
           name: 'articles',
           component: require('@/components/ArticlesPage').default
+        },
+        {
+          path: 'students',
+          name: 'students',
+          component: require('@/components/StudentsPage').default
         }
       ]
     },
