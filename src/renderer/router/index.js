@@ -11,7 +11,7 @@ export default new Router({
       children: [{
           path: 'index',
           name: 'index',
-          component: require('@/components/IndexPage/IndexPage').default
+          component: require('@/components/IndexPage').default
         },
         {
           path: 'exampapers',

@@ -12,6 +12,13 @@ import store from './store'
 import domain from './utils/domain'
 import utils from './utils/utils'
 
+//Font Awesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+library.add(fas);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
