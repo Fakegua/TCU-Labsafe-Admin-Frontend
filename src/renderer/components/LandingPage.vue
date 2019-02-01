@@ -30,7 +30,7 @@
 					active-text-color="#ffd04b"
 					:router="true"
 				>
-					<el-menu-item index="index">
+					<el-menu-item index="/">
 						<i class="el-icon-info"></i>
 						<span slot="title">仪表盘</span>
 					</el-menu-item>

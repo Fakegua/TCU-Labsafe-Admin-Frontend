@@ -9,8 +9,8 @@ export default new Router({
       name: 'landing-page',
       component: require('@/components/LandingPage').default,
       children: [{
-          path: 'index',
-          name: 'index',
+          path: '/',
+          name: '/',
           component: require('@/components/IndexPage').default
         },
         {

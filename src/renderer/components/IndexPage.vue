@@ -232,7 +232,7 @@
 					});
 					//筛选试卷
 					this.finishedExampapers.forEach(item => {
-						if (item.finishedExampaper == value) {
+						if (item.finishedExampaper == this.checkedExampaper) {
 							this.tableData.forEach(item2 => {
 								if (item.username == item2.username) {
 									item2.score = item.finishedScore;
