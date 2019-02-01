@@ -75,8 +75,16 @@
 						<el-option v-for="(item,index) in userClass" :key="index" :label="item" :value="item"></el-option>
 					</el-select>
 				</el-col>
+				<el-col v-if="checkedExampaper" :span="6">
+					<el-button
+						@click="exportExcel"
+						type="success"
+						size="mini"
+						style="margin-left:20px;margin-top:14px"
+					>导出为excel</el-button>
+				</el-col>
 			</el-row>
-			<el-table empty-text="请选择试卷" :data="tableData" :border="true">
+			<el-table id="table" empty-text="请选择试卷" :data="tableData" :border="true">
 				<el-table-column prop="username" label="学号"></el-table-column>
 				<el-table-column prop="userClass" label="班级"></el-table-column>
 				<el-table-column prop="userName" label="姓名"></el-table-column>
@@ -88,6 +96,8 @@
 </template>
 
 <script>
+	import FileSaver from "file-saver";
+	import XLSX from "xlsx";
 	export default {
 		data() {
 			return {
@@ -181,6 +191,27 @@
 					.catch(err => {
 						this.$message.error("操作失败，请检查网络或联系管理员");
 					});
+			},
+			exportExcel() {
+				/* generate workbook object from table */
+				var wb = XLSX.utils.table_to_book(document.querySelector("#table"));
+				/* get binary string as output */
+				var wbout = XLSX.write(wb, {
+					bookType: "xlsx",
+					bookSST: true,
+					type: "array"
+				});
+				try {
+					FileSaver.saveAs(
+						new Blob([wbout], { type: "application/octet-stream" }),
+						`${this.checkedExampaper}(${
+							this.checkedClass ? this.checkedClass : "全体"
+						}).xlsx`
+					);
+				} catch (e) {
+					if (typeof console !== "undefined") console.log(e, wbout);
+				}
+				return wbout;
 			}
 		},
 		watch: {
