@@ -250,7 +250,7 @@
 			},
 			currentChange(c) {
 				this.currentPage = c;
-				this.init();
+				this.init(this.searchContent, this.searchCategory);
 			},
 			search() {
 				this.init(this.searchContent, this.searchCategory);
