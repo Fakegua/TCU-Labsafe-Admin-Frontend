@@ -101,10 +101,10 @@
 	export default {
 		data() {
 			return {
-				studentsCount: "加载中",
-				exampapersCount: "加载中",
-				questionsCount: "加载中",
-				articlesCount: "加载中",
+				studentsCount: "0",
+				exampapersCount: "0",
+				questionsCount: "0",
+				articlesCount: "0",
 				checkedExampaper: "",
 				checkedClass: "",
 				finishedExampapers: [],

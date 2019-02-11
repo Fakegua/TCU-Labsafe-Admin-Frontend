@@ -60,13 +60,51 @@
 				<router-view></router-view>
 			</el-col>
 		</el-row>
+		<el-dialog
+			title="请输入管理员密码"
+			:visible.sync="dialogVisible"
+			width="30%"
+			:close-on-click-modal="false"
+			:close-on-press-escape="false"
+			:show-close="false"
+		>
+			<el-input v-model="password"></el-input>
+			<span slot="footer" class="dialog-footer">
+				<el-button type="primary" @click="checkPassword">确 定</el-button>
+			</span>
+		</el-dialog>
 	</div>
 </template>
 
 <script>
 	export default {
 		data() {
-			return {};
+			return {
+				password: "",
+				dialogVisible: true
+			};
+		},
+		created() {
+			this.dialogVisible = true;
+		},
+		methods: {
+			checkPassword() {
+				this.$http
+					.post(`${this.$domain}/admin/`, {
+						password: this.password
+					})
+					.then(result => {
+						if (result.data) {
+							this.dialogVisible = false;
+							this.$message.success("欢迎登录");
+						} else {
+							this.$message.error("密码错误");
+						}
+					})
+					.catch(err => {
+						this.$message.error("网络错误，请联系管理员。");
+					});
+			}
 		}
 	};
 </script>
