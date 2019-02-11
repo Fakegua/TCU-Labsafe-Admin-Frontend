@@ -37,6 +37,11 @@ export default new Router({
           path: 'files',
           name: 'files',
           component: require('@/components/FilesPage').default
+        },
+        {
+          path: 'admin',
+          name: 'admin',
+          component: require('@/components/AdminPage').default
         }
       ]
     },

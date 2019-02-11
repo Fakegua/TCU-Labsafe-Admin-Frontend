@@ -54,6 +54,10 @@
 						<i class="el-icon-menu"></i>
 						<span slot="title">学生管理</span>
 					</el-menu-item>
+					<el-menu-item index="admin">
+						<i class="el-icon-star-on"></i>
+						<span slot="title">密码管理</span>
+					</el-menu-item>
 				</el-menu>
 			</el-col>
 			<el-col class="right" :span="18">
