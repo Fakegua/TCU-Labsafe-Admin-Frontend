@@ -1,6 +1,6 @@
 {
   "name": "labsafe.tcu.edu.cn-admin",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Raool <838326280@qq.com>",
   "description": "An electron-vue project",
   "license": null,
@@ -17,7 +17,7 @@
     "postinstall": ""
   },
   "build": {
-    "productName": "labsafe.tcu.edu.cn-admin",
+    "productName": "天津城建大学实验室安全网管理系统",
     "appId": "cn.edu.tcu.labsafe.admin",
     "directories": {
       "output": "build"
