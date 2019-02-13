@@ -72,7 +72,7 @@
 			:close-on-press-escape="false"
 			:show-close="false"
 		>
-			<el-input v-model="password"></el-input>
+			<el-input v-model="password" type="password"></el-input>
 			<span slot="footer" class="dialog-footer">
 				<el-button type="primary" @click="checkPassword">确 定</el-button>
 			</span>
@@ -106,7 +106,7 @@
 						}
 					})
 					.catch(err => {
-						this.$message.error("网络错误，请联系管理员。");
+						this.$message.error("加载错误，请检查网络或联系管理员。");
 					});
 			}
 		}
